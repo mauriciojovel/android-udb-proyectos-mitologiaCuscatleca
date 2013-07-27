@@ -6,7 +6,7 @@
     tools:context=".PersonajeActivity" >
 
     <fragment
-        android:id="@+id/fragment1"
+        android:id="@+id/listPersonajes"
         android:name="com.udb.shinmen.mad.mitologia.cuscatleca.fragment.PersonajesListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

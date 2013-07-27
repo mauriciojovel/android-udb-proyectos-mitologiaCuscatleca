@@ -32,7 +32,7 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 		SQLiteDatabase db = null;
 		//long primaryKey = 0L;
 		try {
-			db = getWritableDatabase();
+			db = getDatabase();
 			db.beginTransaction();
 			values.put(DB.PersonajeDescribe.NOMBRE, nombre);
 			values.put(DB.PersonajeDescribe.SIPNOSIS, sipnosis);
@@ -76,7 +76,7 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 		SQLiteDatabase db = null;
 		int eraser = 0;
 		try {
-			db = getWritableDatabase();
+			db = getDatabase();
 			db.beginTransaction();
 			eraser = db.delete(
 					DB.PersonajeDescribe.TABLE_NAME
@@ -100,15 +100,32 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 	public Cursor findAll(Personaje orderBy) {
 		SQLiteDatabase db = null;
 		Cursor r = null;
-		db = getReadableDatabase();
+		db = getDatabase();
 		r = db.query(DB.PersonajeDescribe.TABLE_NAME
 				, DB.PersonajeDescribe.ALL_COLUMNS
 				, null, null, null, null
 				, orderBy!=null?
 						DB.PersonajeDescribe.ALL_COLUMNS[orderBy.ordinal()]
 								:null);
+//		db.close();
 		return r;
 		
 	}
+	
+	public Cursor get(long id) {
+		SQLiteDatabase db = null;
+		Cursor r = null;
+		db = getDatabase();
+		r = db.query(DB.PersonajeDescribe.TABLE_NAME
+				, DB.PersonajeDescribe.ALL_COLUMNS
+				, DB.PersonajeDescribe.ID+"=?", new String[]{id+""}
+				, null, null
+				,DB.PersonajeDescribe.NOMBRE
+			);
+	//	db.close();
+		return r;
+	}
+	
+	
 
 }

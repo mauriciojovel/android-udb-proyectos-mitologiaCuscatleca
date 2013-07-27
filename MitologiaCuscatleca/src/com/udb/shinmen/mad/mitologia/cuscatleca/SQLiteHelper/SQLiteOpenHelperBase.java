@@ -15,6 +15,8 @@ public abstract class SQLiteOpenHelperBase extends SQLiteOpenHelper
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private SQLiteDatabase db;
 
 	public SQLiteOpenHelperBase(Context context) {
 		super(context, DB.DATABASE_NAME, null, DB.DATABASE_VERSION);
@@ -38,6 +40,19 @@ public abstract class SQLiteOpenHelperBase extends SQLiteOpenHelper
 		db.execSQL(DB.PersonajeDescribe.SQL_CREATE);
 		for (String sql : DB.PersonajeDescribe.INITIAL_DATA) {
 			db.execSQL(sql);
+		}
+	}
+	
+	public SQLiteDatabase getDatabase() {
+		if(db == null) {
+			db = getWritableDatabase();
+		}
+		return db;
+	}
+	
+	public void close() {
+		if(db != null) {
+			db.close();
 		}
 	}
 

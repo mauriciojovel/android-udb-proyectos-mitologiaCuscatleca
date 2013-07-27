@@ -2,12 +2,17 @@ package com.udb.shinmen.mad.mitologia.cuscatleca.fragment;
 
 import java.io.Serializable;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.ListView;
 
+import com.udb.shinmen.mad.mitologia.cuscatleca.DetailActivity;
+import com.udb.shinmen.mad.mitologia.cuscatleca.R;
 import com.udb.shinmen.mad.mitologia.cuscatleca.SQLiteHelper.PersonajeSQLiteOpenHelper;
 import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB;
 
@@ -44,17 +49,16 @@ public class PersonajesListFragment extends ListFragment
 				, android.R.layout.simple_list_item_1
 				, personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
 				, FROM, TO, 0);
-		v = getActivity().findViewById(-1);//FIXME poner un id valido
+		v = getActivity().findViewById(R.id.detailPersonaje);
 		dualPane = (v != null && v.getVisibility() == View.VISIBLE);
 		if(savedInstanceState != null) {
 			currentPos = savedInstanceState.getInt(CURR_POS, -1);
 		}
 		if(dualPane) {
 			getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+			showItem(currentPos);
 		}
 		setListAdapter(adapter);
-		
-		showItem(currentPos);
 	}
 	
 	@Override
@@ -65,11 +69,32 @@ public class PersonajesListFragment extends ListFragment
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
+		//super.onListItemClick(l, v, position, id);
 		showItem(position);
 	}
 
 	public void showItem(int currentPos) {
-		
+		this.currentPos = currentPos;
+		Cursor c = (Cursor) adapter.getItem(currentPos);
+		long id = c.getLong(DB.Personaje._id.ordinal());
+		if(dualPane) {
+			getListView().setItemChecked(currentPos, true);
+			PersonajeDetailFragment p = 
+					(PersonajeDetailFragment)getFragmentManager()
+										.findFragmentById(R.id.detailPersonaje);
+			if(p == null || p.getIndex() != id) {
+				p = PersonajeDetailFragment.newInstance(id);
+				FragmentTransaction ft = getFragmentManager()
+													.beginTransaction();
+				ft.replace(R.id.detailPersonaje, p);
+				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+				ft.commit();
+			}
+		} else {
+			Intent i = new Intent();
+			i.setClass(getActivity(), DetailActivity.class);
+			i.putExtra(PersonajeDetailFragment.CURR_POS_DETAIL, id);
+			startActivity(i);
+		}
 	}
 }

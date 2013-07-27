@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.udb.shinmen.mad.mitologia.cuscatleca.DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:parentActivityName="com.udb.shinmen.mad.mitologia.cuscatleca.PersonajeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.udb.shinmen.mad.mitologia.cuscatleca.PersonajeActivity" />
+        </activity>
     </application>
 
 </manifest>
