@@ -17,7 +17,6 @@ public class DB implements Serializable{
     	,sipnosis
     	,ruta_imagen
     	,link_interes
-    	,personaje_id
     }
     
     public static class PersonajeDescribe {
@@ -37,27 +36,30 @@ public class DB implements Serializable{
     	                                               		.ordinal()];
     	public static String LINK_INTERES = ALL_COLUMNS[Personaje.link_interes
 	                                               		.ordinal()];
-    	public static String PERSONAJE_ID = ALL_COLUMNS[Personaje.personaje_id
-	                                               		.ordinal()];
     	
     	public static String SQL_CREATE = "CREATE TABLE " + TABLE_NAME
     			+ "("
     			+ " _id INTEGER PRIMARY KEY"
-    			+ " nombre TEXT NOT NULL"
-    			+ " sipnosis TEXT NOT NULL"
-    			+ " ruta_imagen TEXT"
-    			+ " link_interes TEXT"
+    			+ " ,nombre TEXT NOT NULL"
+    			+ " ,sipnosis TEXT NOT NULL"
+    			+ " ,ruta_imagen TEXT"
+    			+ " ,link_interes TEXT"
     			+")";
     	public static String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
     	
     	public static String[] INITIAL_DATA = {
-    		
+    		"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis) "
+    				+"values('nombre 1', 'sipnosis1')"
+    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis) "
+    				+"values('nombre 2', 'sipnosis2')"
+    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis) "
+    	    				+"values('nombre 3', 'sipnosis3')"
     	};
     }
     
     public static final String DATABASE_NAME = "mitologia_cuscatleca";
     
-    public static final Integer DATABASE_VERSION = 1;
+    public static final Integer DATABASE_VERSION = 2;
 
 	public static final String TAG_DB = "MitologiaCuscatlecaDB";
 

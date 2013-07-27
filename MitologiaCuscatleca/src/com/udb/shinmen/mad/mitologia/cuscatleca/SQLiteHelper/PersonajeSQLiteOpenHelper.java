@@ -30,7 +30,7 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 		boolean r = false;
 		ContentValues values = new ContentValues();
 		SQLiteDatabase db = null;
-		long primaryKey = 0L;
+		//long primaryKey = 0L;
 		try {
 			db = getWritableDatabase();
 			db.beginTransaction();
@@ -46,7 +46,7 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 			} else {
 				values.putNull(DB.PersonajeDescribe.LINK_INTERES);
 			}
-			values.put(DB.PersonajeDescribe.PERSONAJE_ID, primaryKey);
+			//values.put(DB.PersonajeDescribe.PERSONAJE_ID, primaryKey);
 			if(id > 0L) {
 				db.update(DB.PersonajeDescribe.TABLE_NAME, values
 						, DB.PersonajeDescribe.ID + "=?", new String[]{id+""}
