@@ -31,7 +31,7 @@ public class PersonajesListFragment extends ListFragment
 	};
 
 	private static final int[] TO = {
-		android.R.id.text1
+		R.id.ctvTituloPersonaje
 	};
 	
 	SimpleCursorAdapter adapter;
@@ -46,7 +46,7 @@ public class PersonajesListFragment extends ListFragment
 		personajeSQLiteOpenHelper = 
 				new PersonajeSQLiteOpenHelper(getActivity());
 		adapter = new SimpleCursorAdapter(getActivity()
-				, android.R.layout.simple_list_item_1
+				, R.layout.personaje_list_item
 				, personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
 				, FROM, TO, 0);
 		v = getActivity().findViewById(R.id.detailPersonaje);
