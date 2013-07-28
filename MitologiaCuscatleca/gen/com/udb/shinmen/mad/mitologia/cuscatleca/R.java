@@ -21,11 +21,15 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int checked_background_shape=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int launcher_icon=0x7f020002;
+        public static final int list_item_background_selector=0x7f020003;
     }
     public static final class id {
         public static final int FrameLayout1=0x7f080000;
-        public static final int action_settings=0x7f08000b;
+        public static final int action_settings=0x7f08000c;
+        public static final int ctvTituloPersonaje=0x7f08000b;
         public static final int detailPersonaje=0x7f080003;
         public static final int imageView1=0x7f080007;
         public static final int linearLayout01=0x7f080004;
@@ -40,6 +44,7 @@ public final class R {
     public static final class layout {
         public static final int activity_personaje=0x7f030000;
         public static final int activity_personaje_detail=0x7f030001;
+        public static final int personaje_list_item=0x7f030002;
     }
     public static final class menu {
         public static final int detail=0x7f070000;
