@@ -52,7 +52,7 @@ public class PersonajesListFragment extends ListFragment
 		v = getActivity().findViewById(R.id.detailPersonaje);
 		dualPane = (v != null && v.getVisibility() == View.VISIBLE);
 		if(savedInstanceState != null) {
-			currentPos = savedInstanceState.getInt(CURR_POS, -1);
+			currentPos = savedInstanceState.getInt(CURR_POS, 0);
 		}
 		if(dualPane) {
 			getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -73,6 +73,16 @@ public class PersonajesListFragment extends ListFragment
 		showItem(position);
 	}
 
+	public void save(String nombre, String sipnosis, String linkInteres) {
+	    personajeSQLiteOpenHelper.save(nombre, sipnosis, null, linkInteres);
+	    adapter = new SimpleCursorAdapter(getActivity()
+                , R.layout.personaje_list_item
+                , personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
+                , FROM, TO, 0);
+	    setListAdapter(adapter);
+	    
+	}
+	
 	public void showItem(int currentPos) {
 		this.currentPos = currentPos;
 		Cursor c = (Cursor) adapter.getItem(currentPos);
@@ -83,7 +93,7 @@ public class PersonajesListFragment extends ListFragment
 					(PersonajeDetailFragment)getFragmentManager()
 										.findFragmentById(R.id.detailPersonaje);
 			if(p == null || p.getIndex() != id) {
-				p = PersonajeDetailFragment.newInstance(id);
+				p = PersonajeDetailFragment.newInstance(id, true);
 				FragmentTransaction ft = getFragmentManager()
 													.beginTransaction();
 				ft.replace(R.id.detailPersonaje, p);
@@ -94,6 +104,7 @@ public class PersonajesListFragment extends ListFragment
 			Intent i = new Intent();
 			i.setClass(getActivity(), DetailActivity.class);
 			i.putExtra(PersonajeDetailFragment.CURR_POS_DETAIL, id);
+			i.putExtra(PersonajeDetailFragment.DUAL_PANE, false);
 			startActivity(i);
 		}
 	}

@@ -7,5 +7,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="fotoPersonaje">Foto del Personaje</string>
     <string name="title_activity_detail">Personaje</string>
+    <string name="nombre_personaje">Nombre personaje</string>
+    <string name="sipnosis">Sipnosis</string>
+    <string name="link_interes">Link interes</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="nuevo_personaje">Nuevo personaje</string>
+    <string name="editar_personaje">Editar personaje</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="pipe">|</string>
 
 </resources>

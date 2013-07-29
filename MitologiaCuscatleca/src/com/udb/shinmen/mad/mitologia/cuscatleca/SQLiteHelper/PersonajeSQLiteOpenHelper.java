@@ -65,7 +65,7 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 					db.setTransactionSuccessful();
 				}
 				db.endTransaction();
-				db.close();
+				//db.close();
 			}
 		}
 		return r;
@@ -91,7 +91,7 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 					db.setTransactionSuccessful();
 				}
 				db.endTransaction();
-				db.close();
+				//db.close();
 			}
 		}
 		return r;

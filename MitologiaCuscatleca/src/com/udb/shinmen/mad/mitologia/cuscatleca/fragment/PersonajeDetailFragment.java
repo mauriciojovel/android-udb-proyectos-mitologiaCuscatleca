@@ -17,12 +17,15 @@ public class PersonajeDetailFragment extends Fragment{
 	
 	static final String CURR_POS_DETAIL = "com.udb.shinmen.mad.mitologia"
 			+ ".cuscatleca.fragment.PersonajeDetailFragment.CURR_POS_DETAIL";
+	static final String DUAL_PANE = "com.udb.shinmen.mad.mitologia"
+            + ".cuscatleca.fragment.PersonajeDetailFragment.DUAL_PANE";
 	PersonajeSQLiteOpenHelper personajeSQLiteOpenHelper;
 	
-	public static PersonajeDetailFragment newInstance(long id) {
+	public static PersonajeDetailFragment newInstance(long id, boolean dualPane) {
 		PersonajeDetailFragment p = new PersonajeDetailFragment();
 		Bundle b = new Bundle();
 		b.putLong(CURR_POS_DETAIL, id);
+		b.putBoolean(DUAL_PANE, dualPane);
 		p.setArguments(b);
 		return p;
 	}
@@ -40,6 +43,9 @@ public class PersonajeDetailFragment extends Fragment{
 		if(data.moveToFirst()) {
 			textView = (TextView) v.findViewById(R.id.txvNombre);
 			textView.setText(data.getString(DB.Personaje.nombre.ordinal()));
+			if(isDualPane()) {
+			    textView.setVisibility(View.GONE);
+			}
 			textView = (TextView) v.findViewById(R.id.txvSipnosis);
 			textView.setText(data.getString(DB.Personaje.sipnosis.ordinal()));
 		}
@@ -50,6 +56,10 @@ public class PersonajeDetailFragment extends Fragment{
 	
 	public long getIndex() {
 		return getArguments().getLong(CURR_POS_DETAIL);
+	}
+	
+	public boolean isDualPane() {
+	    return getArguments().getBoolean(DUAL_PANE);
 	}
 	
 }
