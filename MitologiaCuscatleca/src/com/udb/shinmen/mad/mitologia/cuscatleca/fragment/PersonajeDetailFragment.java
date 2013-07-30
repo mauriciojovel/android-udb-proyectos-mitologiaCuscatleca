@@ -1,22 +1,25 @@
 package com.udb.shinmen.mad.mitologia.cuscatleca.fragment;
 
 
-import com.udb.shinmen.mad.mitologia.cuscatleca.R;
-import com.udb.shinmen.mad.mitologia.cuscatleca.SQLiteHelper.PersonajeSQLiteOpenHelper;
-import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB;
-
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PersonajeDetailFragment extends Fragment{
+import com.udb.shinmen.mad.mitologia.cuscatleca.R;
+import com.udb.shinmen.mad.mitologia.cuscatleca.SQLiteHelper.PersonajeSQLiteOpenHelper;
+import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB;
+
+public class PersonajeDetailFragment extends Fragment implements OnClickListener{
 	
 	static final String CURR_POS_DETAIL = "com.udb.shinmen.mad.mitologia"
 			+ ".cuscatleca.fragment.PersonajeDetailFragment.CURR_POS_DETAIL";
@@ -71,6 +74,7 @@ public class PersonajeDetailFragment extends Fragment{
 			textView = (TextView) v.findViewById(R.id.txvLinkInteres);
             textView.setText(data.getString(DB.Personaje
                                                     .link_interes.ordinal()));
+            textView.setOnClickListener(this);
 		}
 		data.close();
 		personajeSQLiteOpenHelper.close();
@@ -84,5 +88,26 @@ public class PersonajeDetailFragment extends Fragment{
 	public boolean isDualPane() {
 	    return getArguments().getBoolean(DUAL_PANE);
 	}
+	
+	public void callWebBrowser(String url) {
+	    if(url != null && !url.trim().equals("")) {
+            Intent callIntent = new Intent(Intent.ACTION_VIEW);
+            if(url.startsWith("http")) {
+                callIntent.setData(Uri.parse(url));
+            } else {
+                callIntent.setData(Uri.parse("http://"+url));
+            }
+            startActivity(callIntent);
+	    }
+
+	}
+
+    @Override
+    public void onClick(View v) {
+        if (v instanceof TextView) {
+            TextView t = (TextView) v;
+            callWebBrowser(t.getText().toString());
+        }        
+    }
 	
 }
