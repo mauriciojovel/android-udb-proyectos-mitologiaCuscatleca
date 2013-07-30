@@ -28,11 +28,14 @@ public final class R {
     }
     public static final class id {
         public static final int FrameLayout1=0x7f080000;
-        public static final int action_pesonaje_form=0x7f080011;
-        public static final int action_settings=0x7f080010;
-        public static final int ctvTituloPersonaje=0x7f08000f;
+        public static final int action_pesonaje_form=0x7f080014;
+        public static final int action_settings=0x7f080013;
+        public static final int btnSeleccionar=0x7f080011;
+        public static final int ctvTituloPersonaje=0x7f080012;
         public static final int detailPersonaje=0x7f080003;
+        public static final int imageLoader=0x7f080010;
         public static final int imageView1=0x7f080007;
+        public static final int layout2=0x7f08000f;
         public static final int linearLayout01=0x7f080004;
         public static final int linearLayout02=0x7f080002;
         public static final int linearLayoutColumn01=0x7f080005;
@@ -69,6 +72,7 @@ public final class R {
         public static final int nuevo=0x7f050009;
         public static final int nuevo_personaje=0x7f05000a;
         public static final int pipe=0x7f05000e;
+        public static final int seleccionar=0x7f05000f;
         public static final int sipnosis=0x7f050007;
         public static final int title_activity_detail=0x7f050005;
         public static final int title_activity_personaje=0x7f050001;

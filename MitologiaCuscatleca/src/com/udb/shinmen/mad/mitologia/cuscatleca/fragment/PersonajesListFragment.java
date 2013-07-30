@@ -73,8 +73,9 @@ public class PersonajesListFragment extends ListFragment
 		showItem(position);
 	}
 
-	public void save(String nombre, String sipnosis, String linkInteres) {
-	    personajeSQLiteOpenHelper.save(nombre, sipnosis, null, linkInteres);
+	public void save(String nombre, String sipnosis, String linkInteres
+	        , String url) {
+	    personajeSQLiteOpenHelper.save(nombre, sipnosis, url, linkInteres);
 	    adapter = new SimpleCursorAdapter(getActivity()
                 , R.layout.personaje_list_item
                 , personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
@@ -88,7 +89,9 @@ public class PersonajesListFragment extends ListFragment
 		Cursor c = (Cursor) adapter.getItem(currentPos);
 		long id = c.getLong(DB.Personaje._id.ordinal());
 		if(dualPane) {
-			getListView().setItemChecked(currentPos, true);
+		    //FIXME revisar porque no se muestra como seleccionado el item
+		    //      cuando es primera vez.
+			//getListView().setItemChecked(currentPos, true);
 			PersonajeDetailFragment p = 
 					(PersonajeDetailFragment)getFragmentManager()
 										.findFragmentById(R.id.detailPersonaje);

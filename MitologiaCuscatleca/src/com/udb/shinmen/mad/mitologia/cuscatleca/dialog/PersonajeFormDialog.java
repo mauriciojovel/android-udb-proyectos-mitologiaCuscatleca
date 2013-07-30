@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.udb.shinmen.mad.mitologia.cuscatleca.R;
 
@@ -16,11 +21,14 @@ public class PersonajeFormDialog extends DialogFragment {
     EditText textNombre;
     EditText textSipnosis;
     EditText textLinkInteres;
+    String rutaImagen;
+    ImageView view;
     
     OnAcceptDialog listener;
     
     public interface OnAcceptDialog {
-        void onAcceptDialog(String nombre, String sipnosis, String linkInteres);
+        void onAcceptDialog(String nombre, String sipnosis, String linkInteres
+                , String url);
     }
     
     @Override
@@ -54,7 +62,8 @@ public class PersonajeFormDialog extends DialogFragment {
                                 .findViewById(R.id.textLinksInteres);
                 listener.onAcceptDialog(textNombre.getText().toString()
                         , textSipnosis.getText().toString()
-                        , textLinkInteres.getText().toString());
+                        , textLinkInteres.getText().toString()
+                        , rutaImagen);
             }
             
         })
@@ -66,7 +75,25 @@ public class PersonajeFormDialog extends DialogFragment {
         })
         .setTitle(R.string.nuevo_personaje); 
         d = builder.create();
+        
         return d;
     }
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+    
+    public void loadImage(String ruta) {
+        view = (ImageView) getDialog().findViewById(R.id.imageLoader);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        Bitmap bm = BitmapFactory.decodeFile(ruta, options);
+        view.setImageBitmap(bm);
+        rutaImagen = ruta;
+    }
+
+    
     
 }

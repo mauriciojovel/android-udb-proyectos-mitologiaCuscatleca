@@ -32,4 +32,26 @@
         android:hint="@string/link_interes"
         android:inputType="textUri" />
 
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageLoader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/fotoPersonaje"
+            android:src="@drawable/launcher_icon" />
+
+        <Button
+            android:id="@+id/btnSeleccionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seleccionar" 
+            android:onClick="onClick"/>
+
+    </LinearLayout>
+
 </LinearLayout>
