@@ -42,20 +42,35 @@ public class PersonajeDetailFragment extends Fragment{
 		personajeSQLiteOpenHelper = 
 				new PersonajeSQLiteOpenHelper(getActivity());
 		Cursor data = personajeSQLiteOpenHelper.get(getIndex());
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		Bitmap bm;
+		ImageView img;
+		String pathImg;
 		
+        options.inSampleSize = 2;
+        
+        
 		if(data.moveToFirst()) {
+		    //Nombre personaje
 			textView = (TextView) v.findViewById(R.id.txvNombre);
 			textView.setText(data.getString(DB.Personaje.nombre.ordinal()));
 			if(isDualPane()) {
 			    textView.setVisibility(View.GONE);
 			}
+			//Sipnosis
 			textView = (TextView) v.findViewById(R.id.txvSipnosis);
 			textView.setText(data.getString(DB.Personaje.sipnosis.ordinal()));
-			ImageView img = (ImageView) v.findViewById(R.id.imageView1);
-			BitmapFactory.Options options = new BitmapFactory.Options();
-	        options.inSampleSize = 2;
-	        Bitmap bm = BitmapFactory.decodeFile(data.getString(DB.Personaje.ruta_imagen.ordinal()), options);
-	        img.setImageBitmap(bm);
+			//Imagen
+			img = (ImageView) v.findViewById(R.id.imageView1);
+			pathImg = data.getString(DB.Personaje.ruta_imagen.ordinal());
+			if(pathImg != null && !pathImg.trim().equals("")) {
+    	        bm = BitmapFactory.decodeFile(pathImg, options);
+    	        img.setImageBitmap(bm);
+			}
+			//Link interes
+			textView = (TextView) v.findViewById(R.id.txvLinkInteres);
+            textView.setText(data.getString(DB.Personaje
+                                                    .link_interes.ordinal()));
 		}
 		data.close();
 		personajeSQLiteOpenHelper.close();
