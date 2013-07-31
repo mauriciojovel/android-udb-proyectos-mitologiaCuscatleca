@@ -1,7 +1,5 @@
 package com.udb.shinmen.mad.mitologia.cuscatleca;
 
-import com.udb.shinmen.mad.mitologia.cuscatleca.fragment.PersonajeDetailFragment;
-
 import android.annotation.TargetApi;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -11,6 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.udb.shinmen.mad.mitologia.cuscatleca.fragment.PersonajeDetailFragment;
 
 public class DetailActivity extends FragmentActivity {
 
@@ -48,8 +48,8 @@ public class DetailActivity extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.detail, menu);
-		return true;
+		//getMenuInflater().inflate(R.menu.detail, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override

@@ -9,6 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -78,7 +81,43 @@ public class PersonajeDetailFragment extends Fragment implements OnClickListener
 		}
 		data.close();
 		personajeSQLiteOpenHelper.close();
+		setHasOptionsMenu(true);
 		return v;
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	    super.onCreateOptionsMenu(menu, inflater);
+	    getActivity().getMenuInflater()
+	                    .inflate(R.menu.context_share_menu, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return onContextItemSelected(item);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+        case R.id.action_personaje_share:
+            personajeSQLiteOpenHelper = 
+            new PersonajeSQLiteOpenHelper(getActivity());
+            Cursor data = personajeSQLiteOpenHelper.get(getIndex());
+            String nombre = "-Ups-";
+            String sipnosis = "Esto no debio de haber pasado";
+            if(data.moveToFirst()) {
+                nombre = data.getString(DB.Personaje.nombre.ordinal());
+                sipnosis = data.getString(DB.Personaje.sipnosis.ordinal());
+            }
+            data.close();
+            callShare(nombre, sipnosis);
+            break;
+
+        default:
+            break;
+        }
+	    return super.onContextItemSelected(item);
 	}
 	
 	public long getIndex() {
@@ -100,6 +139,15 @@ public class PersonajeDetailFragment extends Fragment implements OnClickListener
             startActivity(callIntent);
 	    }
 
+	}
+	
+	public void callShare(String nombrePersonaje, String sipnosis) {
+	    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, nombrePersonaje);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, sipnosis);
+        startActivity(Intent.createChooser(sharingIntent
+                , getResources().getString(R.string.compartir)));
 	}
 
     @Override
