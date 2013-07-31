@@ -3,7 +3,6 @@ package com.udb.shinmen.mad.mitologia.cuscatleca.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.udb.shinmen.mad.mitologia.cuscatleca.R;
@@ -49,8 +47,8 @@ public class PersonajeDetailFragment extends Fragment implements OnClickListener
 				new PersonajeSQLiteOpenHelper(getActivity());
 		Cursor data = personajeSQLiteOpenHelper.get(getIndex());
 		BitmapFactory.Options options = new BitmapFactory.Options();
-		Bitmap bm;
-		ImageView img;
+		//Bitmap bm;
+		//ImageView img;
 		String pathImg;
 		
         options.inSampleSize = 2;
@@ -67,11 +65,11 @@ public class PersonajeDetailFragment extends Fragment implements OnClickListener
 			textView = (TextView) v.findViewById(R.id.txvSipnosis);
 			textView.setText(data.getString(DB.Personaje.sipnosis.ordinal()));
 			//Imagen
-			img = (ImageView) v.findViewById(R.id.imageView1);
+			//img = (ImageView) v.findViewById(R.id.imageView1);
 			pathImg = data.getString(DB.Personaje.ruta_imagen.ordinal());
 			if(pathImg != null && !pathImg.trim().equals("")) {
-    	        bm = BitmapFactory.decodeFile(pathImg, options);
-    	        img.setImageBitmap(bm);
+    	   //     bm = BitmapFactory.decodeFile(pathImg, options);
+    	     //   img.setImageBitmap(bm);
 			}
 			//Link interes
 			textView = (TextView) v.findViewById(R.id.txvLinkInteres);
