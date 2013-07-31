@@ -17,16 +17,18 @@ public class DB implements Serializable{
     	,sipnosis
     	,ruta_imagen
     	,link_interes
+    	,ingresado_usuario
     }
     
     public static class PersonajeDescribe {
-    	public static String TABLE_NAME = "sipnosis";
+    	public static String TABLE_NAME = "personaje";
     	public static String[] ALL_COLUMNS = {
 			"_id"
 			,"nombre"
 			,"sipnosis"
 			,"ruta_imagen"
 			,"link_interes"
+			,"ingresado_usuario"
     	};
     	public static String ID = ALL_COLUMNS[Personaje._id.ordinal()];
     	public static String NOMBRE = ALL_COLUMNS[Personaje.nombre.ordinal()];
@@ -36,6 +38,8 @@ public class DB implements Serializable{
     	                                               		.ordinal()];
     	public static String LINK_INTERES = ALL_COLUMNS[Personaje.link_interes
 	                                               		.ordinal()];
+    	public static String INGRESADO_USUARIO = ALL_COLUMNS[Personaje.ingresado_usuario
+                                                        .ordinal()];
     	
     	public static String SQL_CREATE = "CREATE TABLE " + TABLE_NAME
     			+ "("
@@ -44,11 +48,12 @@ public class DB implements Serializable{
     			+ " ,sipnosis TEXT NOT NULL"
     			+ " ,ruta_imagen TEXT"
     			+ " ,link_interes TEXT"
+    			+ " ,ingresado_usuario INTEGER NOT NULL"
     			+")";
     	public static String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
     	
     	public static String[] INITIAL_DATA = {
-    		"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis) "
+    		"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ingresado_usuario) "
     				+"values('El cipitío', 'Hijo de la Sihuanaba, \"El Cipitío\" es un personaje muy conocido en las leyendas salvadoreñas, se trata de un niño pequeño y barrigón que nunca creció.\n\n"
     				+"El Cipitío se alimenta de guineos y de la ceniza que queda en las cocinas de leña de las viviendas rurales, utiliza un sombrero muy grande que se mueve al compás de su caminar, " 
     				+"se aparece por las noches como un espíritu burlón haciendo bromas, riendo y bailando alrededor de su victima.\n\n"
@@ -60,8 +65,10 @@ public class DB implements Serializable{
     				+"teniéndolos al revés, enorme barriga y con el poder de desaparecer y aparecer en otro lugar.\n\n"
     				+"El Cipitío es un ser propio del folklore salvadoreño. La leyenda ha evolucionado de generación en generación, "
     				+"adaptando muchos de los elementos de la misma para no perder vigencia; aunque en el fondo, conserva la esencia ancestral.\n"
-    				+"')"
-    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis) "
+    				+"'"
+    				+", 0"
+    				+")"
+    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ingresado_usuario) "
     				+"values('La Carreta Bruja o Carreta Chillona', '"
     				+"Cuentan que hace años vivió un hombre sin fé a quien todos llamaban \"Pedro el Malo\".\n\n"
     				+"Para un 15 de mayo, fiesta de San Isidro Labrador, mucha gente llegó al pueblo para la bendición de carretas. "
@@ -75,8 +82,10 @@ public class DB implements Serializable{
     				+"anda sola sin bueyes que la conduzcan, causando espanto por donde se oye el \"traca, taca, tarata\", que hacen sus ruedas de madera.\n\n"
     				+"Los abuelos cuentan que la carreta sin bueyes pasa por los pueblos de la campiña salvadoreña donde no hay amor ni armonía entre sus habitantes,"
     				+"siempre después de la media noche.\n"
-    				+"')"
-    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis) "
+    				+"'"
+                    +", 0"
+                    +")"
+    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ingresado_usuario) "
     	    				+"values('La Flor de Amate', '"
     	    				+"El Ámate es un árbol muy conocido en El Salvador, este árbol es muy diferente a los demás en su estructura física." 
     	    				+"Su tronco es muy grueso y mal formado, pues tiene unas protuberancias (Si así se le pueden llamar), que hacen que el tronco "
@@ -90,13 +99,15 @@ public class DB implements Serializable{
     	    				+"hombre gana tendrá todo lo que él quiera.\n\n"
     	    				+"Se cuenta que las únicas personas que ven a este árbol florecer en cualquier época del año son los MUDOS, ya que "
     	    				+"se sabe que nunca dirán nada de esta flor encantada.\n"
-    	    				+"')"
+    	    				+"'"
+    	                    +", 0"
+    	                    +")"
     	};
     }
     
     public static final String DATABASE_NAME = "mitologia_cuscatleca";
     
-    public static final Integer DATABASE_VERSION = 3;
+    public static final Integer DATABASE_VERSION = 4;
 
 	public static final String TAG_DB = "MitologiaCuscatlecaDB";
 

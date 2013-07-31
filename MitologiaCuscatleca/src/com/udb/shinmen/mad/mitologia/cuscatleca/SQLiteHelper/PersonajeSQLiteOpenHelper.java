@@ -52,6 +52,7 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 						, DB.PersonajeDescribe.ID + "=?", new String[]{id+""}
 				);
 			} else {
+			    values.put(DB.PersonajeDescribe.INGRESADO_USUARIO, 1);
 				db.insertOrThrow(DB.PersonajeDescribe.TABLE_NAME, null, values);
 			}
 			r = true;

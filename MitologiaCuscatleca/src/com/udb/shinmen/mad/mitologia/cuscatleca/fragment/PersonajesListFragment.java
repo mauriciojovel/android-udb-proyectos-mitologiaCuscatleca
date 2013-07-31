@@ -8,8 +8,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.udb.shinmen.mad.mitologia.cuscatleca.DetailActivity;
 import com.udb.shinmen.mad.mitologia.cuscatleca.R;
@@ -59,6 +65,7 @@ public class PersonajesListFragment extends ListFragment
 			showItem(currentPos);
 		}
 		setListAdapter(adapter);
+		registerForContextMenu(getListView());
 	}
 	
 	@Override
@@ -69,18 +76,60 @@ public class PersonajesListFragment extends ListFragment
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		//super.onListItemClick(l, v, position, id);
 		showItem(position);
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	        ContextMenuInfo menuInfo) {
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    AdapterView.AdapterContextMenuInfo info 
+	                            = (AdapterContextMenuInfo) menuInfo;
+	    Cursor c = (Cursor) adapter.getItem(info.position);
+	    if(c != null) {
+	        //Solo se muestra el menu si el dato es ingresado por el usuario
+	        if(c.getInt(DB.Personaje.ingresado_usuario.ordinal())==1) {
+	            menu.setHeaderTitle(c.getString(DB.Personaje.nombre.ordinal()));
+	            MenuInflater inflater = getActivity().getMenuInflater();
+	            inflater.inflate(R.menu.context_personaje_menu, menu);
+	        }
+	    }
+	    
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterView.AdapterContextMenuInfo info 
+	            = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+	    switch (item.getItemId()) {
+        case R.id.action_personaje_delete:
+            Cursor c = (Cursor) adapter.getItem(info.position);
+            delete(c.getLong(DB.Personaje._id.ordinal()));
+            break;
+
+        default:
+            break;
+        }
+	    return super.onContextItemSelected(item);
+	}
+	
+	public void delete(long key) {
+	    personajeSQLiteOpenHelper.delete(key);
+	    refresh();
+	}
+	
+	public void refresh() {
+	    adapter = new SimpleCursorAdapter(getActivity()
+                , R.layout.personaje_list_item
+                , personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
+                , FROM, TO, 0);
+        setListAdapter(adapter);
 	}
 
 	public void save(String nombre, String sipnosis, String linkInteres
 	        , String url) {
 	    personajeSQLiteOpenHelper.save(nombre, sipnosis, url, linkInteres);
-	    adapter = new SimpleCursorAdapter(getActivity()
-                , R.layout.personaje_list_item
-                , personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
-                , FROM, TO, 0);
-	    setListAdapter(adapter);
+	    refresh();
 	    
 	}
 	

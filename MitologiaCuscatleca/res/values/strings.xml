@@ -17,5 +17,6 @@
     <string name="cancelar">Cancelar</string>
     <string name="pipe">|</string>
     <string name="seleccionar">Seleccionar</string>
+    <string name="eliminar">Eliminar</string>
 
 </resources>
