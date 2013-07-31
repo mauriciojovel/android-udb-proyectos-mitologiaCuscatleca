@@ -3,10 +3,12 @@ package com.udb.shinmen.mad.mitologia.cuscatleca.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.Html.ImageGetter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,12 +48,7 @@ public class PersonajeDetailFragment extends Fragment implements OnClickListener
 		personajeSQLiteOpenHelper = 
 				new PersonajeSQLiteOpenHelper(getActivity());
 		Cursor data = personajeSQLiteOpenHelper.get(getIndex());
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		//Bitmap bm;
-		//ImageView img;
 		String pathImg;
-		
-        options.inSampleSize = 2;
         
         
 		if(data.moveToFirst()) {
@@ -63,14 +60,24 @@ public class PersonajeDetailFragment extends Fragment implements OnClickListener
 			}
 			//Sipnosis
 			textView = (TextView) v.findViewById(R.id.txvSipnosis);
-			textView.setText(data.getString(DB.Personaje.sipnosis.ordinal()));
-			//Imagen
-			//img = (ImageView) v.findViewById(R.id.imageView1);
+			//textView.setText(data.getString(DB.Personaje.sipnosis.ordinal()));
+			String html = data.getString(DB.Personaje.sipnosis.ordinal());
+
 			pathImg = data.getString(DB.Personaje.ruta_imagen.ordinal());
 			if(pathImg != null && !pathImg.trim().equals("")) {
-    	   //     bm = BitmapFactory.decodeFile(pathImg, options);
-    	     //   img.setImageBitmap(bm);
-			}
+                html = "<div><img src=\""+pathImg+"\"/>" + html + "</div>";
+            } else {
+                html = "<div>" + html + "</div>";
+            }
+			textView.setText(Html.fromHtml(html, new ImageGetter() {
+	               
+                @Override
+                public Drawable getDrawable(String source) {
+                    Drawable d = Drawable.createFromPath(source);
+                    d.setBounds(0,0,75,75);
+                    return d;
+                }
+            }, null));
 			//Link interes
 			textView = (TextView) v.findViewById(R.id.txvLinkInteres);
             textView.setText(data.getString(DB.Personaje
