@@ -98,8 +98,10 @@ public class PersonajeDetailFragment extends Fragment implements
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		getActivity().getMenuInflater()
-				.inflate(R.menu.context_share_menu, menu);
+		if(getIndex() > 0) {
+    		getActivity().getMenuInflater()
+    				.inflate(R.menu.context_share_menu, menu);
+		}
 	}
 
 	@Override

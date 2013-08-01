@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -134,9 +135,18 @@ public class PersonajeActivity extends FragmentActivity
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            newFragment.loadImage(picturePath); 
+            try {
+                newFragment.loadImage(picturePath);
+            } catch(Exception ex) {
+                //FIXME por alguna razon al haber hecho clic en nuevo
+                // personaje y luego girar la pantalla el picker
+                // carga una direccion no valida.
+                Log.e("MitologiaCuscatleca", "Error al girar la pantalla" ,ex);
+                Toast.makeText(this, getResources()
+                        .getString(R.string.error_giro_pantalla)
+                        , Toast.LENGTH_SHORT).show();
+            }
             
-            // String picturePath contains the path of selected Image
         }
     }
 

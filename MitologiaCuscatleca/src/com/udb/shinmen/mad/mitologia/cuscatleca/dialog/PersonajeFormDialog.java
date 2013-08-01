@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.udb.shinmen.mad.mitologia.cuscatleca.R;
 
@@ -60,10 +61,17 @@ public class PersonajeFormDialog extends DialogFragment {
                                     .findViewById(R.id.textSipnosis);
                 textLinkInteres = (EditText) getDialog()
                                 .findViewById(R.id.textLinksInteres);
-                listener.onAcceptDialog(textNombre.getText().toString()
-                        , textSipnosis.getText().toString()
-                        , textLinkInteres.getText().toString()
-                        , rutaImagen);
+                if(!textNombre.getText().toString().trim().equals("")
+                        &&!textSipnosis.getText().toString().trim().equals("")){
+                    listener.onAcceptDialog(textNombre.getText().toString()
+                            , textSipnosis.getText().toString()
+                            , textLinkInteres.getText().toString()
+                            , rutaImagen);
+                } else {
+                    Toast.makeText(getActivity()
+                            , getResources().getString(R.string.cancelarAgregar)
+                            , Toast.LENGTH_LONG).show();
+                }
             }
             
         })
