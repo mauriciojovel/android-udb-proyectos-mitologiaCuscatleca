@@ -42,7 +42,7 @@ public class PersonajesListFragment extends ListFragment
 	
 	SimpleCursorAdapter adapter;
 	boolean dualPane;
-	int currentPos;
+	int currentPos=-1;
 	PersonajeSQLiteOpenHelper personajeSQLiteOpenHelper;
 	
 	@Override
@@ -58,7 +58,7 @@ public class PersonajesListFragment extends ListFragment
 		v = getActivity().findViewById(R.id.detailPersonaje);
 		dualPane = (v != null && v.getVisibility() == View.VISIBLE);
 		if(savedInstanceState != null) {
-			currentPos = savedInstanceState.getInt(CURR_POS, 0);
+			currentPos = savedInstanceState.getInt(CURR_POS, -1);
 		}
 		if(dualPane) {
 			getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -116,6 +116,7 @@ public class PersonajesListFragment extends ListFragment
 	public void delete(long key) {
 	    personajeSQLiteOpenHelper.delete(key);
 	    refresh();
+	    currentPos = -1;
 	}
 	
 	public void refresh() {
@@ -124,6 +125,21 @@ public class PersonajesListFragment extends ListFragment
                 , personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
                 , FROM, TO, 0);
         setListAdapter(adapter);
+        
+        // Recargamos el fragment si es dual
+        if(dualPane) {
+            PersonajeDetailFragment p = 
+                    (PersonajeDetailFragment) getFragmentManager()
+                                .findFragmentById(R.id.detailPersonaje);
+            if (p == null || p.getIndex() != -1) {
+                p = PersonajeDetailFragment.newInstance(-1, true);
+                FragmentTransaction ft = getFragmentManager()
+                        .beginTransaction();
+                ft.replace(R.id.detailPersonaje, p);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            }
+        }
 	}
 
 	public void save(String nombre, String sipnosis, String linkInteres
@@ -135,29 +151,32 @@ public class PersonajesListFragment extends ListFragment
 	
 	public void showItem(int currentPos) {
 		this.currentPos = currentPos;
-		Cursor c = (Cursor) adapter.getItem(currentPos);
-		long id = c.getLong(DB.Personaje._id.ordinal());
-		if(dualPane) {
-		    //FIXME revisar porque no se muestra como seleccionado el item
-		    //      cuando es primera vez.
-			//getListView().setItemChecked(currentPos, true);
-			PersonajeDetailFragment p = 
-					(PersonajeDetailFragment)getFragmentManager()
-										.findFragmentById(R.id.detailPersonaje);
-			if(p == null || p.getIndex() != id) {
-				p = PersonajeDetailFragment.newInstance(id, true);
-				FragmentTransaction ft = getFragmentManager()
-													.beginTransaction();
-				ft.replace(R.id.detailPersonaje, p);
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-				ft.commit();
-			}
-		} else {
-			Intent i = new Intent();
-			i.setClass(getActivity(), DetailActivity.class);
-			i.putExtra(PersonajeDetailFragment.CURR_POS_DETAIL, id);
-			i.putExtra(PersonajeDetailFragment.DUAL_PANE, false);
-			startActivity(i);
-		}
+		Cursor c = null;
+		if (currentPos >= 0) {
+            c = (Cursor) adapter.getItem(currentPos);
+            long id = c.getLong(DB.Personaje._id.ordinal());
+            if (dualPane) {
+                //FIXME revisar porque no se muestra como seleccionado el item
+                //      cuando es primera vez.
+                //getListView().setItemChecked(currentPos, true);
+                PersonajeDetailFragment p = 
+                        (PersonajeDetailFragment) getFragmentManager()
+                                    .findFragmentById(R.id.detailPersonaje);
+                if (p == null || p.getIndex() != id) {
+                    p = PersonajeDetailFragment.newInstance(id, true);
+                    FragmentTransaction ft = getFragmentManager()
+                            .beginTransaction();
+                    ft.replace(R.id.detailPersonaje, p);
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    ft.commit();
+                }
+            } else {
+                Intent i = new Intent();
+                i.setClass(getActivity(), DetailActivity.class);
+                i.putExtra(PersonajeDetailFragment.CURR_POS_DETAIL, id);
+                i.putExtra(PersonajeDetailFragment.DUAL_PANE, false);
+                startActivity(i);
+            }
+        }
 	}
 }

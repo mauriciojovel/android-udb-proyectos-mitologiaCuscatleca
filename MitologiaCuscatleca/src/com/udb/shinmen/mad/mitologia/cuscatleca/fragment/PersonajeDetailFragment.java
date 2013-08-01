@@ -29,7 +29,8 @@ public class PersonajeDetailFragment extends Fragment implements
 			+ ".cuscatleca.fragment.PersonajeDetailFragment.DUAL_PANE";
 	PersonajeSQLiteOpenHelper personajeSQLiteOpenHelper;
 
-	public static PersonajeDetailFragment newInstance(long id, boolean dualPane) {
+	public static PersonajeDetailFragment newInstance(long id
+	        , boolean dualPane) {
 		PersonajeDetailFragment p = new PersonajeDetailFragment();
 		Bundle b = new Bundle();
 		b.putLong(CURR_POS_DETAIL, id);
@@ -45,41 +46,50 @@ public class PersonajeDetailFragment extends Fragment implements
 		WebView webView = null;
 		View v = inflater.inflate(R.layout.activity_personaje_detail,
 				container, false);
-		personajeSQLiteOpenHelper = new PersonajeSQLiteOpenHelper(getActivity());
-		Cursor data = personajeSQLiteOpenHelper.get(getIndex());
-		String pathImg;
+		long index = getIndex();
+		if (index>0) {
+            personajeSQLiteOpenHelper = new PersonajeSQLiteOpenHelper(
+                    getActivity());
+            Cursor data = personajeSQLiteOpenHelper.get(getIndex());
+            String pathImg;
+            if (data.moveToFirst()) {
+                // Nombre personaje
+                textView = (TextView) v.findViewById(R.id.txvNombre);
+                textView.setText(data.getString(DB.Personaje.nombre.ordinal()));
+                if (isDualPane()) {
+                    textView.setVisibility(View.GONE);
+                }
+                // Sipnosis
+                webView = (WebView) v.findViewById(R.id.wvSipnosis);
+                String html = data.getString(DB.Personaje.sipnosis.ordinal());
+                pathImg = data.getString(DB.Personaje.ruta_imagen.ordinal());
 
-		if (data.moveToFirst()) {
-			// Nombre personaje
-			textView = (TextView) v.findViewById(R.id.txvNombre);
-			textView.setText(data.getString(DB.Personaje.nombre.ordinal()));
-			if (isDualPane()) {
-				textView.setVisibility(View.GONE);
-			}
-			// Sipnosis
-			webView = (WebView) v.findViewById(R.id.wvSipnosis);
-			String html = data.getString(DB.Personaje.sipnosis.ordinal());
-			pathImg = data.getString(DB.Personaje.ruta_imagen.ordinal());
-			
-			html = "<p style=\"word-wrap: break-word; \">" + html + "</p>";
-			
-			if (pathImg != null && !pathImg.trim().equals("")) {
-				html = "<img style=\"clear:right; float: left; margin: 10px\" src=\"file://" + pathImg
-						+ "\" align=\"middle\" height=\"100\" width=\"100\"/>" + html;
-			}
+                html = "<p style=\"word-wrap: break-word; \">" + html + "</p>";
 
-			webView.getSettings().setSupportZoom(false);
-			webView.getSettings().setJavaScriptEnabled(false);
-			webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
-			webView.setBackgroundColor(Color.parseColor(getResources().getString(R.color.lightPaper)));
-			// Link interes
-			textView = (TextView) v.findViewById(R.id.txvLinkInteres);
-			textView.setText(data.getString(DB.Personaje.link_interes.ordinal()));
-			textView.setOnClickListener(this);
-		}
-		data.close();
-		personajeSQLiteOpenHelper.close();
-		setHasOptionsMenu(true);
+                if (pathImg != null && !pathImg.trim().equals("")) {
+                    html = "<img style=\"clear:right; float: left; "
+                            + "margin: 10px\" src=\"file://"
+                            + pathImg
+                            + "\" align=\"middle\" height=\"100\" width=\"100\"/>"
+                            + html;
+                }
+
+                webView.getSettings().setSupportZoom(false);
+                webView.getSettings().setJavaScriptEnabled(false);
+                webView.loadDataWithBaseURL(null, html, "text/html", "utf-8",
+                        null);
+                webView.setBackgroundColor(Color.parseColor(getResources()
+                        .getString(R.color.lightPaper)));
+                // Link interes
+                textView = (TextView) v.findViewById(R.id.txvLinkInteres);
+                textView.setText(data.getString(DB.Personaje.link_interes
+                        .ordinal()));
+                textView.setOnClickListener(this);
+            }
+            data.close();
+            personajeSQLiteOpenHelper.close();
+        }
+        setHasOptionsMenu(true);
 		return v;
 	}
 

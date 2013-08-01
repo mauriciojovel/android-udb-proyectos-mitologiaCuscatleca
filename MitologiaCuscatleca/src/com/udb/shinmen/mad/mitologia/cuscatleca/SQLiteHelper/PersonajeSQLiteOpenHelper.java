@@ -1,13 +1,13 @@
 package com.udb.shinmen.mad.mitologia.cuscatleca.SQLiteHelper;
 
-import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB;
-import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB.Personaje;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB;
+import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB.Personaje;
 
 public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 
@@ -34,8 +34,11 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 		try {
 			db = getDatabase();
 			db.beginTransaction();
-			values.put(DB.PersonajeDescribe.NOMBRE, nombre);
-			values.put(DB.PersonajeDescribe.SIPNOSIS, sipnosis);
+			values.put(DB.PersonajeDescribe.NOMBRE, nombre);			
+			values.put(DB.PersonajeDescribe.SIPNOSIS
+			             , sipnosis.replaceAll(
+			                     System.getProperty("line.separator")
+			                                         , "<br/>"));
 			if(urlImagen != null && !urlImagen.equals("")) {
 				values.put(DB.PersonajeDescribe.RUTA_IMAGEN, urlImagen);
 			} else {
