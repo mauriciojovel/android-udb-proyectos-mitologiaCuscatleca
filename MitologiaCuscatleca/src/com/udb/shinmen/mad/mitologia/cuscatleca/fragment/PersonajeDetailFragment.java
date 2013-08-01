@@ -44,9 +44,9 @@ public class PersonajeDetailFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		TextView textView = null;
-		WebView webView = null;
 		View v = inflater.inflate(R.layout.activity_personaje_detail,
 				container, false);
+		WebView webView = (WebView) v.findViewById(R.id.wvSipnosis);
 		long index = getIndex();
 		if (index>0) {
             personajeSQLiteOpenHelper = new PersonajeSQLiteOpenHelper(
@@ -61,7 +61,6 @@ public class PersonajeDetailFragment extends Fragment implements
                     textView.setVisibility(View.GONE);
                 }
                 // Sipnosis
-                webView = (WebView) v.findViewById(R.id.wvSipnosis);
                 String html = data.getString(DB.Personaje.sipnosis.ordinal());
                 pathImg = data.getString(DB.Personaje.ruta_imagen.ordinal());
 
@@ -74,9 +73,6 @@ public class PersonajeDetailFragment extends Fragment implements
                           + "\" align=\"middle\" height=\"100\" width=\"100\"/>"
                           + html;
                 }
-
-                webView.getSettings().setSupportZoom(false);
-                webView.getSettings().setJavaScriptEnabled(false);
                 webView.loadDataWithBaseURL(null, html, "text/html", "utf-8",
                         null);
                 webView.setBackgroundColor(Color.parseColor(getResources()
@@ -89,7 +85,12 @@ public class PersonajeDetailFragment extends Fragment implements
             }
             data.close();
             personajeSQLiteOpenHelper.close();
+        }else{
+            webView.setBackgroundColor(Color.parseColor(getResources()
+                    .getString(R.color.darkPaper)));
         }
+    	webView.getSettings().setSupportZoom(false);
+        webView.getSettings().setJavaScriptEnabled(false);
         setHasOptionsMenu(true);
 		return v;
 	}

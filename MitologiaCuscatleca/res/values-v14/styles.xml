@@ -9,10 +9,12 @@
         <!-- API 14 theme customizations can go here. -->
         <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:actionBarItemBackground">@drawable/action_bar_item_background_selector</item>
+        <item name="android:scrollbarThumbHorizontal">@drawable/scroll_background_shape</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scroll_background_shape</item>
     </style>
     
     <style name="ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">     
-        <item name="android:background">@color/darkWood</item>
+        <item name="android:background">@drawable/action_bar_background_shape</item>
         <item name="android:titleTextStyle">@style/ActionBarTitleStyle</item>
     </style>
     

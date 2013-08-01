@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="darkWood">#FF351602</color>
-    <color name="lightWood">#FF4C260F</color>
+    <color name="lightWood">#FF592C12</color>
     <color name="lightPaper">#FFFFDEB7</color>
+    <color name="darkPaper">#FFFFBB6A</color>
     <color name="white">#FFFFFF</color>
+    <color name="opaqueWood">#25CCB292</color>
 </resources>
