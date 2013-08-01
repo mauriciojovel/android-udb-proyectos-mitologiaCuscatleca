@@ -22,5 +22,7 @@
     <string name="ascendente">Ordenar</string>
     <string name="errorNoSeleccion">Debes seleccionar una historia para compartir</string>
     <string name="mensajeCompartir">Compartido desde la aplicación Mitologia Cuscatleca</string>
+    <string name="acercaDe">Acerca de</string>
+    <string name="acercaDeInfo">Aplicacion creada por Mauricio Jovel y Carlos Ramirez.\n\nFomentando el folklore salvadoreño.\n\nInfo: mauriciojovel@gmail.com o shinmen14@gmail.com</string>
 
 </resources>

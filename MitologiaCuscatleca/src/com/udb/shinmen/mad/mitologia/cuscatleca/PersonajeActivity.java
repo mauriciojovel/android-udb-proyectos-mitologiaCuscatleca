@@ -1,5 +1,8 @@
 package com.udb.shinmen.mad.mitologia.cuscatleca;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -42,12 +45,31 @@ public class PersonajeActivity extends FragmentActivity
             break;
         case R.id.action_orden:
             showNewOrden();
+            break;
+        case R.id.action_about:
+            showAbout();
+            break;
         default:
             r = super.onOptionsItemSelected(item);
             break;
         }
 	    return r;
 	}
+
+    private void showAbout() {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this);
+ 
+        builder.setMessage(getResources().getString(R.string.acercaDeInfo))
+               .setTitle(getResources().getString(R.string.acercaDe))
+               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                       dialog.cancel();
+                   }
+               });
+        Dialog d = builder.create();
+        d.show();
+    }
 
     private void showNewOrden() {
         PersonajesListFragment p = 
