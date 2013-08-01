@@ -14,7 +14,6 @@
         <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
         <item name="android:scrollbarThumbHorizontal">@drawable/scroll_background_shape</item>
         <item name="android:scrollbarThumbVertical">@drawable/scroll_background_shape</item>
-        <item name="editTextStyle">@android:style/Widget.EditText</item>
     </style>
 
     <!-- Application theme. -->
