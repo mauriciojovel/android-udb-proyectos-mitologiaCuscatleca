@@ -44,6 +44,7 @@ public class PersonajesListFragment extends ListFragment
 	boolean dualPane;
 	int currentPos=-1;
 	PersonajeSQLiteOpenHelper personajeSQLiteOpenHelper;
+	boolean ordenAsc = true;
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -53,7 +54,8 @@ public class PersonajesListFragment extends ListFragment
 				new PersonajeSQLiteOpenHelper(getActivity());
 		adapter = new SimpleCursorAdapter(getActivity()
 				, R.layout.personaje_list_item
-				, personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
+				, personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre
+				        , ordenAsc)
 				, FROM, TO, 0);
 		v = getActivity().findViewById(R.id.detailPersonaje);
 		dualPane = (v != null && v.getVisibility() == View.VISIBLE);
@@ -106,11 +108,16 @@ public class PersonajesListFragment extends ListFragment
             Cursor c = (Cursor) adapter.getItem(info.position);
             delete(c.getLong(DB.Personaje._id.ordinal()));
             break;
-
         default:
             break;
         }
 	    return super.onContextItemSelected(item);
+	}
+	
+	public void orden() {
+	    ordenAsc = !ordenAsc;
+        currentPos = -1;
+        refresh();
 	}
 	
 	public void delete(long key) {
@@ -122,7 +129,8 @@ public class PersonajesListFragment extends ListFragment
 	public void refresh() {
 	    adapter = new SimpleCursorAdapter(getActivity()
                 , R.layout.personaje_list_item
-                , personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre)
+                , personajeSQLiteOpenHelper.findAll(DB.Personaje.nombre
+                        , ordenAsc)
                 , FROM, TO, 0);
         setListAdapter(adapter);
         

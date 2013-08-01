@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.udb.shinmen.mad.mitologia.cuscatleca.R;
 import com.udb.shinmen.mad.mitologia.cuscatleca.SQLiteHelper.PersonajeSQLiteOpenHelper;
@@ -68,10 +69,10 @@ public class PersonajeDetailFragment extends Fragment implements
 
                 if (pathImg != null && !pathImg.trim().equals("")) {
                     html = "<img style=\"clear:right; float: left; "
-                            + "margin: 10px\" src=\"file://"
-                            + pathImg
-                            + "\" align=\"middle\" height=\"100\" width=\"100\"/>"
-                            + html;
+                          + "margin: 10px\" src=\"file://"
+                          + pathImg
+                          + "\" align=\"middle\" height=\"100\" width=\"100\"/>"
+                          + html;
                 }
 
                 webView.getSettings().setSupportZoom(false);
@@ -150,13 +151,28 @@ public class PersonajeDetailFragment extends Fragment implements
 	}
 
 	public void callShare(String nombrePersonaje, String sipnosis) {
-		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-		sharingIntent.setType("text/plain");
-		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-				nombrePersonaje);
-		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, sipnosis);
-		startActivity(Intent.createChooser(sharingIntent, getResources()
-				.getString(R.string.compartir)));
+	    if(getIndex() > 0) {
+    		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+    		sharingIntent.setType("text/plain");
+    		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT
+    		        ,getResources()
+                    .getString(R.string.title_activity_personaje)
+                    + ": "
+                    +nombrePersonaje);
+    		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT
+    		        , sipnosis.replaceAll("<br/>"
+    		                , System.getProperty("line.separator"))
+    		                +System.getProperty("line.separator")
+    		                +System.getProperty("line.separator")
+    		                +getResources().getString(R.string.mensajeCompartir)
+    		);
+    		startActivity(Intent.createChooser(sharingIntent, getResources()
+    				.getString(R.string.compartir)));
+	    } else {
+	        Toast.makeText(getActivity()
+	                , getResources().getString(R.string.errorNoSeleccion)
+	                , Toast.LENGTH_SHORT).show();
+	    }
 	}
 
 	@Override

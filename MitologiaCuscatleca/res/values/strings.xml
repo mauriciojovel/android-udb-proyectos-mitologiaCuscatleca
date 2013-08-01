@@ -19,5 +19,8 @@
     <string name="seleccionar">Seleccionar</string>
     <string name="eliminar">Eliminar</string>
     <string name="compartir">Compartir</string>
+    <string name="ascendente">Ordenar</string>
+    <string name="errorNoSeleccion">Debes seleccionar una historia para compartir</string>
+    <string name="mensajeCompartir">Compartido desde la aplicación Mitologia Cuscatleca</string>
 
 </resources>

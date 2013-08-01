@@ -102,6 +102,10 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 	}
 	
 	public Cursor findAll(Personaje orderBy) {
+        return findAll(orderBy, false);
+    }
+
+    public Cursor findAll(Personaje orderBy, boolean asc) {
 		SQLiteDatabase db = null;
 		Cursor r = null;
 		db = getDatabase();
@@ -109,7 +113,8 @@ public class PersonajeSQLiteOpenHelper extends SQLiteOpenHelperBase {
 				, DB.PersonajeDescribe.ALL_COLUMNS
 				, null, null, null, null
 				, orderBy!=null?
-						DB.PersonajeDescribe.ALL_COLUMNS[orderBy.ordinal()]
+						(DB.PersonajeDescribe.ALL_COLUMNS[orderBy.ordinal()]
+						        +(asc?" asc":" desc"))
 								:null);
 //		db.close();
 		return r;

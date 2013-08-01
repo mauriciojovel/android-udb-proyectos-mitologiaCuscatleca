@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.udb.shinmen.mad.mitologia.cuscatleca.dialog.PersonajeFormDialog;
 import com.udb.shinmen.mad.mitologia.cuscatleca.dialog.PersonajeFormDialog.OnAcceptDialog;
@@ -39,13 +40,27 @@ public class PersonajeActivity extends FragmentActivity
         case R.id.action_pesonaje_form:
             showPersonajeDialog();
             break;
-
+        case R.id.action_orden:
+            showNewOrden();
         default:
             r = super.onOptionsItemSelected(item);
             break;
         }
 	    return r;
 	}
+
+    private void showNewOrden() {
+        PersonajesListFragment p = 
+                (PersonajesListFragment) 
+                  getSupportFragmentManager()
+                    .findFragmentById(R.id.listPersonajes);
+        if(p != null) {
+            p.orden();
+        } else {
+            Toast.makeText(this, "Ups algo no esta bien", Toast.LENGTH_SHORT)
+                                    .show();
+        }
+    }
 
     private void showPersonajeDialog() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
