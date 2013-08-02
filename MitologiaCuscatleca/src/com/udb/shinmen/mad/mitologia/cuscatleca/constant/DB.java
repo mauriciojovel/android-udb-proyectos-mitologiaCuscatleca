@@ -8,9 +8,9 @@ public class DB implements Serializable{
      * 
      */
     private static final long serialVersionUID = 1L;
-    
-   
-    
+
+    public static final String INGRESADO_USUARIO_TRUE = "1";
+  
     public enum Personaje {
     	_id
     	,nombre
@@ -53,7 +53,7 @@ public class DB implements Serializable{
     	public static String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
     	
     	public static String[] INITIAL_DATA = {
-    		"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ingresado_usuario) "
+    		"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ruta_imagen, ingresado_usuario) "
     				+"values('El cipitío', 'Hijo de la Sihuanaba, \"El Cipitío\" es un personaje muy conocido en las leyendas salvadoreñas, se trata de un niño pequeño y barrigón que nunca creció.<br/><br/>"
     				+"El Cipitío se alimenta de guineos y de la ceniza que queda en las cocinas de leña de las viviendas rurales, utiliza un sombrero muy grande que se mueve al compás de su caminar, " 
     				+"se aparece por las noches como un espíritu burlón haciendo bromas, riendo y bailando alrededor de su victima.<br/><br/>"
@@ -66,9 +66,10 @@ public class DB implements Serializable{
     				+"El Cipitío es un ser propio del folklore salvadoreño. La leyenda ha evolucionado de generación en generación, "
     				+"adaptando muchos de los elementos de la misma para no perder vigencia; aunque en el fondo, conserva la esencia ancestral.<br/>"
     				+"'"
+    				+",'cipitio.jpg'"
     				+", 0"
     				+")"
-    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ingresado_usuario) "
+    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ruta_imagen, ingresado_usuario) "
     				+"values('La Carreta Bruja o Carreta Chillona', '"
     				+"Cuentan que hace años vivió un hombre sin fé a quien todos llamaban \"Pedro el Malo\".<br/><br/>"
     				+"Para un 15 de mayo, fiesta de San Isidro Labrador, mucha gente llegó al pueblo para la bendición de carretas. "
@@ -83,9 +84,10 @@ public class DB implements Serializable{
     				+"Los abuelos cuentan que la carreta sin bueyes pasa por los pueblos de la campiña salvadoreña donde no hay amor ni armonía entre sus habitantes,"
     				+"siempre después de la media noche.<br/>"
     				+"'"
-                    +", 0"
-                    +")"
-    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ingresado_usuario) "
+    				+",'carreta.gif'"
+    				+", 0"
+    				+")"
+    		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ruta_imagen, ingresado_usuario) "
     	    				+"values('La Flor de Amate', '"
     	    				+"El Ámate es un árbol muy conocido en El Salvador, este árbol es muy diferente a los demás en su estructura física." 
     	    				+"Su tronco es muy grueso y mal formado, pues tiene unas protuberancias (Si así se le pueden llamar), que hacen que el tronco "
@@ -100,14 +102,15 @@ public class DB implements Serializable{
     	    				+"Se cuenta que las únicas personas que ven a este árbol florecer en cualquier época del año son los MUDOS, ya que "
     	    				+"se sabe que nunca dirán nada de esta flor encantada.<br/>"
     	    				+"'"
-    	                    +", 0"
-    	                    +")"
+    	    				+",'amate.png'"
+    	    				+", 0"
+    	    				+")"
     	};
     }
     
     public static final String DATABASE_NAME = "mitologia_cuscatleca";
     
-    public static final Integer DATABASE_VERSION = 6;
+    public static final Integer DATABASE_VERSION = 10;
 
 	public static final String TAG_DB = "MitologiaCuscatlecaDB";
 

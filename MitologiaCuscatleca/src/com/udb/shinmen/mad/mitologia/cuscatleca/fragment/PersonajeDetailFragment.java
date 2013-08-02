@@ -43,6 +43,7 @@ public class PersonajeDetailFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		String ingresadoUsuario = null;
 		TextView textView = null;
 		View v = inflater.inflate(R.layout.activity_personaje_detail,
 				container, false);
@@ -62,15 +63,22 @@ public class PersonajeDetailFragment extends Fragment implements
                 }
                 // Sipnosis
                 String html = data.getString(DB.Personaje.sipnosis.ordinal());
+                
+                ingresadoUsuario = data.getString(DB.Personaje.ingresado_usuario.ordinal());
+                
                 pathImg = data.getString(DB.Personaje.ruta_imagen.ordinal());
-
+                
+                if(!ingresadoUsuario.equals(DB.INGRESADO_USUARIO_TRUE)){
+                	pathImg = "android_res/drawable/"+pathImg;
+                }
+                
                 html = "<p style=\"word-wrap: break-word; \">" + html + "</p>";
 
                 if (pathImg != null && !pathImg.trim().equals("")) {
                     html = "<img style=\"clear:right; float: left; "
-                          + "margin: 10px\" src=\"file://"
+                          + "margin: 10px\" src=\"file:///"
                           + pathImg
-                          + "\" align=\"middle\" height=\"100\" width=\"100\"/>"
+                          + "\" align=\"middle\" height=\"135\" width=\"100\"/>"
                           + html;
                 }
                 webView.loadDataWithBaseURL(null, html, "text/html", "utf-8",
@@ -89,7 +97,7 @@ public class PersonajeDetailFragment extends Fragment implements
             webView.setBackgroundColor(Color.parseColor(getResources()
                     .getString(R.color.darkPaper)));
         }
-    	webView.getSettings().setSupportZoom(false);
+    	webView.getSettings().setSupportZoom(true);
         webView.getSettings().setJavaScriptEnabled(false);
         setHasOptionsMenu(true);
 		return v;
