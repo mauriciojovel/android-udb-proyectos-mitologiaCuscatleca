@@ -23,7 +23,7 @@
     <string name="errorNoSeleccion">Debes seleccionar una historia para compartir</string>
     <string name="mensajeCompartir">Compartido desde la aplicación Mitologia Cuscatleca</string>
     <string name="acercaDe">Acerca de</string>
-    <string name="acercaDeInfo">Aplicacion creada por Mauricio Jovel y Carlos Ramirez.\n\nFomentando el folklore salvadoreño.\n\nInfo: mauriciojovel@gmail.com o shinmen14@gmail.com</string>
+    <string name="acercaDeInfo">Aplicacion creada por Mauricio Jovel y Carlos Ramirez.\n\nFomentando el folklóre salvadoreño.\n\nInfo: mauriciojovel@gmail.com o shinmen14@gmail.com</string>
     <string name="cancelarAgregar">Se cancelo la adición del personaje, es obligatorio llenar el nombre y la sipnosis.</string>
     <string name="error_giro_pantalla">Por favor cierre el dialogo y vuelva a ejecutarlo, ha sucedido un error inesperado.</string>
 
