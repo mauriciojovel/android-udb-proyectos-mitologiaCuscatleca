@@ -86,7 +86,7 @@ public class DB implements Serializable{
     				+"siempre después de la media noche.<br/>"
     				+"'"
     				+",'carreta.gif'"
-    				+", 0"
+    				+", 0 "
     				+", 'http://www.elsalvadordestinos.com/espanol/cuentosyleyendas/lacarretabruja.php'"
     				+")"
     		,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ruta_imagen, ingresado_usuario,link_interes) "
@@ -105,8 +105,8 @@ public class DB implements Serializable{
     	    				+"se sabe que nunca dirán nada de esta flor encantada.<br/>"
     	    				+"'"
     	    				+",'amate.png'"
-    	    				+", 'http://www.elsalvadordestinos.com/espanol/cuentosyleyendas/laflordeamate.php'"
     	    				+", 0"
+    	    				+", 'http://www.elsalvadordestinos.com/espanol/cuentosyleyendas/laflordeamate.php'"
     	    				+")"
 			,"INSERT INTO " + TABLE_NAME +"(nombre, sipnosis, ruta_imagen, ingresado_usuario,link_interes) "
                     +"values('El Gallo e'' Don Chema'"
@@ -248,7 +248,7 @@ public class DB implements Serializable{
     
     public static final String DATABASE_NAME = "mitologia_cuscatleca";
     
-    public static final Integer DATABASE_VERSION = 14;
+    public static final Integer DATABASE_VERSION = 15;
 
 	public static final String TAG_DB = "MitologiaCuscatlecaDB";
 
