@@ -1,19 +1,20 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_pesonaje_form"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/nuevo"
         android:icon="@android:drawable/ic_menu_add"/>
     <item android:id="@+id/action_orden" 
         android:title="@string/ascendente"
         android:icon="@android:drawable/ic_menu_sort_alphabetically" 
         android:orderInCategory="99"
-        android:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"/>
     <item android:id="@+id/action_about"
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="101"
-        android:showAsAction="ifRoom" android:title="@string/acercaDe"/>
+        app:showAsAction="ifRoom" android:title="@string/acercaDe"/>
 
 </menu>

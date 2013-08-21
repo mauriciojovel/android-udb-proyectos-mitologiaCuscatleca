@@ -9,8 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +21,7 @@ import com.udb.shinmen.mad.mitologia.cuscatleca.dialog.PersonajeFormDialog;
 import com.udb.shinmen.mad.mitologia.cuscatleca.dialog.PersonajeFormDialog.OnAcceptDialog;
 import com.udb.shinmen.mad.mitologia.cuscatleca.fragment.PersonajesListFragment;
 
-public class PersonajeActivity extends FragmentActivity 
+public class PersonajeActivity extends ActionBarActivity 
                                         implements OnAcceptDialog{
     private int RESULT_LOAD_IMAGE = 10;
     PersonajeFormDialog newFragment;

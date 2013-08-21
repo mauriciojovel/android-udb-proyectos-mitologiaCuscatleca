@@ -1,18 +1,16 @@
 package com.udb.shinmen.mad.mitologia.cuscatleca;
 
-import android.annotation.TargetApi;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.udb.shinmen.mad.mitologia.cuscatleca.fragment.PersonajeDetailFragment;
 
-public class DetailActivity extends FragmentActivity {
+public class DetailActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +20,14 @@ public class DetailActivity extends FragmentActivity {
 			finish();
 			return;
 		}
+		setContentView(R.layout.simple_empty_layout);
 		if(savedInstanceState == null) {
 			PersonajeDetailFragment p = new PersonajeDetailFragment();
 			p.setArguments(getIntent().getExtras());
 			FragmentTransaction ft = 
 					getSupportFragmentManager().beginTransaction();
 			ft.add(
-					android.R.id.content, p);
+					android.R.id.empty, p);
 			ft.commit();
 		}
 		setupActionBar();
@@ -38,11 +37,9 @@ public class DetailActivity extends FragmentActivity {
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().show();
 	}
 
 	@Override
