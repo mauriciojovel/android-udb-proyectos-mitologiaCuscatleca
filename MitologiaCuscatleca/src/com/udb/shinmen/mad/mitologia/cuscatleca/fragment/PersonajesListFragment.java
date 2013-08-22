@@ -176,7 +176,7 @@ public class PersonajesListFragment extends ListFragment
                             .beginTransaction();
                     ft.replace(R.id.detailPersonaje, p);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    ft.addToBackStack(null);
+                    //ft.addToBackStack(null);
                     ft.commit();
                 }
             } else {
