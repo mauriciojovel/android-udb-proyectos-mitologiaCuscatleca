@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.udb.shinmen.mad.mitologia.cuscatleca"
-    android:versionCode="3"
-    android:versionName="1.0.2" >
+    android:versionCode="5"
+    android:versionName="2.0.0" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -26,6 +26,14 @@
             android:name="com.udb.shinmen.mad.mitologia.cuscatleca.DetailActivity"
             android:label="@string/title_activity_detail"
             android:parentActivityName="com.udb.shinmen.mad.mitologia.cuscatleca.PersonajeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.udb.shinmen.mad.mitologia.cuscatleca.PersonajeActivity" />
+        </activity>
+        <activity android:name="com.udb.shinmen.mad.mitologia.cuscatleca.BookDetailActivity"
+            android:label="@string/title_activity_detail"
+            android:parentActivityName="com.udb.shinmen.mad.mitologia.cuscatleca.PersonajeActivity"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.udb.shinmen.mad.mitologia.cuscatleca.PersonajeActivity" />
