@@ -146,7 +146,7 @@ public class BookDetailActivity extends ActionBarActivity
         }
         */
         pageView.setViewMode(CurlView.SHOW_ONE_PAGE);
-        pageView.setMargins(.01f, .01f, .01f, .01f);
+        pageView.setMargins(.06f, .01f, .06f, .01f);
     }
 
 }

@@ -134,6 +134,10 @@ public class CuentoProvider implements CurlView.PageProvider {
                 draw = R.drawable.las_botijas;
             } else if(nombreImagen.indexOf("santa_ana")>= 0) {
                 draw = R.drawable.nuestra_senora_de_santa_ana;
+            } else if(nombreImagen.indexOf("amate")>= 0) {
+                draw = R.drawable.amate;
+            } else if(nombreImagen.indexOf("carreta")>= 0) {
+                draw = R.drawable.carreta;
             } else {
                 draw = R.drawable.ic_launcher;
             }
