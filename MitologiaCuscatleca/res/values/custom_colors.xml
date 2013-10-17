@@ -6,4 +6,16 @@
     <color name="darkPaper">#FFFFBB6A</color>
     <color name="white">#FFFFFF</color>
     <color name="opaqueWood">#25CCB292</color>
+    
+    <!-- New Colors -->
+    <color name="second_grey">#ffeeeeee</color> 
+    <color name="card_white">#ffffffff</color> 
+    <color name="card_shadow">#8c666666</color>
+    <color name="card_hover_blue">#ff33b5e5</color>
+    <color name="card_hover_orange">#FFF57300</color>
+    <color name="border_image_line">#dbdbdc</color>
+    <color name="image_background">#ffeeeeee</color>
+    <color name="actionbar_white">#66cccccc</color>
+    <color name="actionbar_grey">#ddd</color>
+    <color name="actionbar_orange">#FFF4DBC6</color>
 </resources>
