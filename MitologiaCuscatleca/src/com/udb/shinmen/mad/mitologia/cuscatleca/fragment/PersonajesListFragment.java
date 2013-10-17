@@ -34,10 +34,12 @@ public class PersonajesListFragment extends ListFragment
 
 	private static final String[] FROM = {
 		DB.PersonajeDescribe.NOMBRE
+		,DB.PersonajeDescribe.SIPNOSIS
 	};
 
 	private static final int[] TO = {
 		R.id.ctvTituloPersonaje
+		,R.id.txtCuento
 	};
 	
 	SimpleCursorAdapter adapter;
