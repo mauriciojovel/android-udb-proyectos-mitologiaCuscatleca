@@ -9,15 +9,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ListView;
 
-import com.udb.shinmen.mad.mitologia.cuscatleca.DetailActivity;
+import com.udb.shinmen.mad.mitologia.cuscatleca.BookDetailActivity;
 import com.udb.shinmen.mad.mitologia.cuscatleca.R;
 import com.udb.shinmen.mad.mitologia.cuscatleca.SQLiteHelper.PersonajeSQLiteOpenHelper;
 import com.udb.shinmen.mad.mitologia.cuscatleca.constant.DB;
@@ -176,12 +176,14 @@ public class PersonajesListFragment extends ListFragment
                             .beginTransaction();
                     ft.replace(R.id.detailPersonaje, p);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    //ft.addToBackStack(null);
                     ft.commit();
                 }
             } else {
                 Intent i = new Intent();
-                i.setClass(getActivity(), DetailActivity.class);
+                i.setClass(getActivity(), BookDetailActivity.class);
                 i.putExtra(PersonajeDetailFragment.CURR_POS_DETAIL, id);
+                i.putExtra(BookDetailActivity.EXTRA_HISTORY, id);
                 i.putExtra(PersonajeDetailFragment.DUAL_PANE, false);
                 startActivity(i);
             }

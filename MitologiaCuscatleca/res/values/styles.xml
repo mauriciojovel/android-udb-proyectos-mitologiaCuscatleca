@@ -4,26 +4,38 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
-        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
-        <item name="android:scrollbarThumbHorizontal">@drawable/scroll_background_shape</item>
-        <item name="android:scrollbarThumbVertical">@drawable/scroll_background_shape</item>
+         <item name="android:actionBarStyle">@style/ActionBar</item>
+         <item name="actionBarStyle">@style/ActionBar</item>
+         <item name="android:actionBarItemBackground">@drawable/action_bar_item_background_selector</item>
+         <item name="actionBarItemBackground">@drawable/action_bar_item_background_selector</item>
+         <item name="android:scrollbarThumbHorizontal">@drawable/scroll_background_shape</item>
+         <item name="android:scrollbarThumbVertical">@drawable/scroll_background_shape</item>
     </style>
-
+    
+    
+    <style name="ActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/action_bar_background_shape</item>
+        <item name="titleTextStyle">@style/ActionBarTitleStyle</item>
+        <item name="android:background">@drawable/action_bar_background_shape</item>
+        <item name="android:titleTextStyle">@style/ActionBarTitleStyle</item>
+    </style>
+    
+    <style name="ActionBarTitleStyle">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="WindowTitleBackground">
-        <item name="android:background">@drawable/action_bar_background_shape</item>
-        <item name="android:textColor" >@android:color/white</item>
-    </style>
+
 
 </resources>
